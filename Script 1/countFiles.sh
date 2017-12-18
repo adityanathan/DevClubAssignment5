@@ -1,19 +1,18 @@
 #!/bin/bash
 
-read -p 'Please enter the path of the directory: ' path
-echo 'Do you want to search for a particular type of file (y/n) ?'
-read choice1
-if [ $choice1 = 'y' ]
+path=$1
+filetype=$2
+if [ -n "$2" ]
 	then
-	read -p 'Please enter the filetype (eg: .txt): ' filetype
+	if [[ $filetype != '.'* ]]
+		then
+		echo "Invalid input"
+		exit -1
+	fi
+
 	echo''
     ls -A $path/*$filetype|wc -l
-    
+ 
 else
 	ls -A $path|wc -l
 fi
-
-
-
-
-
